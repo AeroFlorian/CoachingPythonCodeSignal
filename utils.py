@@ -1,11 +1,25 @@
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
 def check_solution(solution, args):
+    print("======================================")
+    print(f"{bcolors.HEADER}Checking solution {solution.__name__}{bcolors.ENDC}")
     try:
         for index, k in enumerate(args):
             result = solution(*k[0])
             assert result == k[1], f"Test {index+1}/{len(args)} failed!\n\tsolution{k[0]}\n\t\texpected: {k[1]}\n\t\tresult:  {result}"
-            print(f"Test {index+1}/{len(args)} passed!")
+            print(f"{bcolors.OKCYAN}Test {index+1}/{len(args)} passed{bcolors.ENDC}!")
     except AssertionError as e:
         print("Code did not pass Tests!")
-        print(f"{e}")
+        print(f"{bcolors.FAIL}{e}{bcolors.ENDC}")
     else:
-        print("Code passed tests!")
+        print(f"{bcolors.OKGREEN}Solution {solution.__name__} passed tests{bcolors.ENDC}!")
+    print("======================================")

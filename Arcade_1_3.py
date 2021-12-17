@@ -19,6 +19,7 @@ def check_palindrome_reverse(input):
 
 
 if __name__ == "__main__":
+    super_long_string = "a"*1000000 + "b" + "a"*1000000
     params = [
         [["aabaa"], True],
         [["abac"], False],
@@ -26,8 +27,11 @@ if __name__ == "__main__":
         [["az"], False],
         [["abacaba"], True],
         [["z"], True],
-        [["aaabaaaa"], False]
+        [["aaabaaaa"], False],
+        [[super_long_string], True]
     ]
 
     check_solution(check_palindrome_iterate, params)
     check_solution(check_palindrome_reverse, params)
+
+    #We can see that copying and testing equality is 25 times faster for long strings

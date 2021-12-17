@@ -1,3 +1,4 @@
+from time import time
 class bcolors:
     HEADER = '\033[95m'
     OKBLUE = '\033[94m'
@@ -9,6 +10,18 @@ class bcolors:
     BOLD = '\033[1m'
     UNDERLINE = '\033[4m'
 
+def timer_func(func):
+    # This function shows the execution time of
+    # the function object passed
+    def wrap_func(*args, **kwargs):
+        t1 = time()
+        result = func(*args, **kwargs)
+        t2 = time()
+        print(f'Function {func.__name__!r} executed in {(t2-t1):.10f}s')
+        return result
+    return wrap_func
+
+@timer_func
 def check_solution(solution, args):
     print("======================================")
     print(f"{bcolors.HEADER}Checking solution {solution.__name__}{bcolors.ENDC}")
